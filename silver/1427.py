@@ -1,19 +1,18 @@
-N = input()
+import sys
+input = sys.stdin.readline
 
-num = []
-for i in range(len(N)):
-    num.append(N[i])
+n = list(input()[:-1])
 
-num.sort(reverse = True)
+for i in range(len(n)):
+    maxIndex = i
+    for j in range(i+1, len(n)):
+        if n[j] > n[maxIndex]:
+            maxIndex = j
 
-result = ''
-for i in num:
-    result += i
-print(result)
+    if n[maxIndex] > n[i]:
+        tmp = n[i]
+        n[i] = n[maxIndex]
+        n[maxIndex] = tmp
 
-
-
-# list_a = list(map(int, str(input())))
-# list_a.sort(reverse=True)
-# for i in (list_a):
-#     print(i,end='')
+for i in n:
+    print(i, end = '')
