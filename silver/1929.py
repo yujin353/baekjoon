@@ -1,17 +1,18 @@
 import sys, math
 input = sys.stdin.readline
 
-def prime(num):
-    cnt = int(math.sqrt(num)) + 1
-    for i in range(2, cnt):
-        if num % i == 0:
-            return 0
-    return 1
-
-m,n = map(int, input().split())
-for i in range(m, n+1):
-    if i == 1:
-        continue
+m, n = map(int, input().split())
+a = [0] * (n + 1)
+for i in range(2, n + 1):
+    a[i] = i
     
-    if prime(i) == 1:
-        print(i)
+for i in range(2, int(math.sqrt(n)) + 1):
+    if a[i] == 0:
+        continue
+
+    for j in range(i+i, n+1, i):
+        a[j] = 0
+
+for i in range(m, n+1):
+    if a[i] != 0:
+        print(a[i])
