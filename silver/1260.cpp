@@ -8,8 +8,6 @@ vector<vector<int>> connect;
 vector<bool> visited;
 
 void DFS(int x) {
-	if (visited[x])
-		return;
 	visited[x] = true;
 	cout << x << " ";
 
@@ -23,10 +21,11 @@ void DFS(int x) {
 void BFS(int x) {
 	queue<int> q;
 	q.push(x);
+	visited[x] = true;
+
 	while (!q.empty()) {
 		int now = q.front();
 		q.pop();
-		visited[now] = true;
 		cout << now << " ";
 
 		for (long i = 0; i < connect[now].size(); i++) {
@@ -61,8 +60,9 @@ int main(){
 	visited.resize(n+1, false);
 	DFS(s);
 	cout << "\n";
-	for (int i = 1; i <= n; i++)
-		visited[i] = false;
+	fill(visited.begin(), visited.end(), false); // 방문배열 초기화
+	/*for (int i = 1; i <= n; i++)
+		visited[i] = false;*/
 	BFS(s);
 	cout << "\n";
 }
